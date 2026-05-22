@@ -1,0 +1,45 @@
+pipeline {
+    agent { 
+        // Run on the remote agent provisioned by Terraform
+        label 'aws-agent' 
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out source code...'
+                // checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                // sh './gradlew build' or 'npm run build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // sh './gradlew test' or 'npm test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying artifacts...'
+                // sh './deploy.sh'
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo 'Pipeline execution complete.'
+        }
+        success {
+            echo 'Build successful!'
+        }
+        failure {
+            echo 'Build failed. Please check the logs.'
+        }
+    }
+}

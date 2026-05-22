@@ -1,0 +1,5 @@
+git:latest
+workflow-aggregator:latest
+credentials-binding:latest
+ssh-slaves:latest
+amazon-ec2:latest
